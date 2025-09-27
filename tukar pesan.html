@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tukar Pesan Aman</title>
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --text: #1a1a1a;
+      --card: #fff;
+      --border: #ddd;
+      --primary: #2563eb;
+      --secondary: #4b5563;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      resize: vertical;
+      min-height: 80px;
+      font-size: 14px;
+      margin-top: 6px;
+      margin-bottom: 14px;
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #1d4ed8;
+    }
+
+    .note {
+      font-size: 13px;
+      color: var(--secondary);
+    }
+
+    .footer {
+      font-size: 13px;
+      color: var(--secondary);
+      text-align: center;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔐 Tukar Pesan Aman (AES-GCM)</h1>
+
+    <!-- KUNCI -->
+    <div class="card">
+      <h2>1. Kunci AES</h2>
+      <button onclick="generateKey()">Buat Kunci Baru</button>
+      <textarea id="aesKey" placeholder="Atau tempel kunci yang diterima dari pengirim..."></textarea>
+      <div class="note">Gunakan kunci ini untuk enkripsi dan dekripsi. Simpan dengan aman.</div>
+    </div>
+
+    <!-- ENKRIPSI -->
+    <div class="card">
+      <h2>2. Enkripsi Pesan</h2>
+      <textarea id="plainText" placeholder="Tulis pesan yang ingin dienkripsi..."></textarea>
+      <button onclick="encrypt()">Enkripsi</button>
+      <textarea id="cipherText" placeholder="Hasil enkripsi (salin dan kirim ke penerima)" readonly></textarea>
+      <textarea id="ivText" placeholder="IV (harus dikirim bersama pesan)" readonly></textarea>
+    </div>
+
+    <!-- DEKRIPSI -->
+    <div class="card">
+      <h2>3. Dekripsi Pesan</h2>
+      <textarea id="receivedCipherText" placeholder="Tempel pesan terenkripsi dari pengirim..."></textarea>
+      <textarea id="receivedIV" placeholder="Tempel IV yang dikirim pengirim..."></textarea>
+      <button onclick="decrypt()">Dekripsi</button>
+      <textarea id="decryptedText" placeholder="Pesan asli akan muncul di sini..." readonly></textarea>
+    </div>
+
+    <!-- PANDUAN -->
+    <div class="card">
+      <h2>📘 Panduan Singkat</h2>
+      <div class="note">
+        <strong>Untuk Mengirim Pesan:</strong><br>
+        1. Klik <code>Buat Kunci Baru</code><br>
+        2. Tulis pesan → klik <code>Enkripsi</code><br>
+        3. Kirim hasil enkripsi + IV ke penerima (bisa lewat chat/email)<br><br>
+
+        <strong>Untuk Menerima Pesan:</strong><br>
+        1. Tempel kunci AES yang sama<br>
+        2. Tempel pesan terenkripsi dan IV dari pengirim<br>
+        3. Klik <code>Dekripsi</code> untuk membaca pesan<br><br>
+
+        ⚠️ Jangan kirim kunci dan pesan melalui jalur yang sama.
+      </div>
+    </div>
+
+    <div class="footer">
+      Dibuat untuk keperluan edukasi & eksperimen. Gunakan secara bertanggung jawab.
+    </div>
+  </div>
+
+  <script>
+    let aesKeyObject;
+
+    async function generateKey() {
+      aesKeyObject = await crypto.subtle.generateKey(
+        { name: "AES-GCM", length: 256 },
+        true,
+        ["encrypt", "decrypt"]
+      );
+      const rawKey = await crypto.subtle.exportKey("raw", aesKeyObject);
+      document.getElementById("aesKey").value = btoa(String.fromCharCode(...new Uint8Array(rawKey)));
+    }
+
+    async function importKey() {
+      const base64Key = document.getElementById("aesKey").value.trim();
+      const keyBuffer = Uint8Array.from(atob(base64Key), c => c.charCodeAt(0));
+      aesKeyObject = await crypto.subtle.importKey(
+        "raw", keyBuffer, "AES-GCM", true, ["encrypt", "decrypt"]
+      );
+    }
+
+    async function encrypt() {
+      await importKey();
+      const text = document.getElementById("plainText").value;
+      const encoded = new TextEncoder().encode(text);
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const encrypted = await crypto.subtle.encrypt(
+        { name: "AES-GCM", iv },
+        aesKeyObject,
+        encoded
+      );
+      document.getElementById("cipherText").value = btoa(String.fromCharCode(...new Uint8Array(encrypted)));
+      document.getElementById("ivText").value = btoa(String.fromCharCode(...iv));
+    }
+
+    async function decrypt() {
+      await importKey();
+      const cipherBase64 = document.getElementById("receivedCipherText").value.trim();
+      const ivBase64 = document.getElementById("receivedIV").value.trim();
+      const cipherBytes = Uint8Array.from(atob(cipherBase64), c => c.charCodeAt(0));
+      const ivBytes = Uint8Array.from(atob(ivBase64), c => c.charCodeAt(0));
+
+      try {
+        const decrypted = await crypto.subtle.decrypt(
+          { name: "AES-GCM", iv: ivBytes },
+          aesKeyObject,
+          cipherBytes
+        );
+        document.getElementById("decryptedText").value = new TextDecoder().decode(decrypted);
+      } catch (e) {
+        alert("❌ Gagal dekripsi. Kunci atau IV salah.");
+      }
+    }
+  </script>
+</body>
+</html>
