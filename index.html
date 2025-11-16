@@ -45,7 +45,7 @@
       color: #ff4d88;
       border: none;
       padding: 8px 15px;
-      border-radius: 18px;
+      border-radius: 20px;
       font-weight: 600;
       cursor: pointer;
       transition: 0.3s;
@@ -135,7 +135,6 @@
       position: absolute;
       top: 50%;
       padding: 12px;
-      margin-top: -20px;
       color: white;
       font-size: 22px;
       font-weight: bold;
@@ -174,6 +173,7 @@
     }
   </style>
 </head>
+
 <body>
 
 <header>
@@ -185,7 +185,7 @@
   <button class="active" onclick="openTab('home', this)">🏠 Home</button>
   <button onclick="openTab('requirements', this)">📋 Syarat Join</button>
   <button onclick="openTab('reminder', this)">⏰ Reminder</button>
-  <button onclick="openTab('fasilitas', this)">🎁 Fasilitas</button>
+  <button onclick="openTab('paket', this)">🎁 Paket Bisnis</button>
   <button onclick="openTab('testimoni', this)">⭐ Testimoni</button>
 </nav>
 
@@ -223,11 +223,12 @@
   <p>Untuk memulai bisnis harus ada modal awal seperti membuka warung. Freelance ini juga begitu.</p>
   <p>Setelah bayar modal, fasilitas akan dikirim dan kamu bisa langsung bangun channel bisnismu.</p>
   <p>‼️TOLONG BACA‼️ Kalau sudah chat & bilang masih mau mikir² atau ada alasan apa pun, HARAP tetap kabari.</p>
-  <p>⚠️ BISNIS INI BUKAN SISTEM GAJI. Penghasilan tergantung kinerja dan job yang kamu kerjakan, bukan dari gaji admin/owner.</p>
+  <p>⚠️ BISNIS INI BUKAN SISTEM GAJI. Penghasilan tergantung kinerja dan job yang kamu kerjakan.</p>
 </section>
 
 <section id="paket">
   <h2>🎁 Paket Bisnis</h2>
+
   <h3>🎬 PREFLIX</h3>
   <ul>
     <li>Insider Preflix</li>
@@ -271,17 +272,20 @@
     </div>
     <div class="testimonial-slide fade">
       <img src="image/foto3.jpeg">
-      </div>
+    </div>
     <div class="testimonial-slide fade">
       <img src="image/foto4.jpeg">
     </div>
+
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
   </div>
+
   <div class="dots-container">
     <span class="dot" onclick="currentSlide(1)"></span>
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
   </div>
 </section>
 
@@ -300,19 +304,25 @@ function openTab(tabName, el) {
 
 let slideIndex = 1;
 showSlides(slideIndex);
+
 function plusSlides(n) { showSlides(slideIndex += n); }
 function currentSlide(n) { showSlides(slideIndex = n); }
+
 function showSlides(n) {
   let slides = document.getElementsByClassName("testimonial-slide");
   let dots = document.getElementsByClassName("dot");
+
   if (n > slides.length) slideIndex = 1;
   if (n < 1) slideIndex = slides.length;
+
   for (let i=0;i<slides.length;i++) slides[i].style.display="none";
   for (let i=0;i<dots.length;i++) dots[i].classList.remove("active");
+
   slides[slideIndex-1].style.display="block";
   dots[slideIndex-1].classList.add("active");
 }
-setInterval(()=>{plusSlides(1);},5000);
+
+setInterval(()=>{ plusSlides(1); }, 5000);
 </script>
 
 </body>
