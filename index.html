@@ -57,9 +57,7 @@
       box-shadow: 0 0 10px rgba(255, 182, 193, 0.7);
     }
 
-    nav button:hover {
-      transform: scale(1.05);
-    }
+    nav button:hover { transform: scale(1.05); }
 
     section {
       display: none;
@@ -97,83 +95,8 @@
       margin-top: 3rem;
     }
 
-    footer p {
-      margin: 0.4rem 0;
-      color: #ff4d88;
-    }
+    footer p { margin: 0.4rem 0; color: #ff4d88; }
 
-    /* SLIDER */
-    .testimonial-container {
-      position: relative;
-      max-width: 100%;
-      margin: 20px auto;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
-    }
-
-    .testimonial-slide {
-      display: none;
-    }
-
-    .testimonial-slide img {
-      width: 100%;
-      border-radius: 20px;
-      object-fit: cover;
-    }
-
-    .fade {
-      animation: fadeEffect 1.2s ease-in-out;
-    }
-
-    @keyframes fadeEffect {
-      from { opacity: 0.3; }
-      to { opacity: 1; }
-    }
-
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      padding: 12px;
-      color: white;
-      font-size: 22px;
-      font-weight: bold;
-      background: rgba(255, 128, 170, 0.5);
-      border-radius: 50%;
-      transition: 0.3s;
-      user-select: none;
-    }
-
-    .prev:hover, .next:hover {
-      background: #ff4d88;
-    }
-
-    .prev { left: 15px; }
-    .next { right: 15px; }
-
-    .dots-container {
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .dot {
-      height: 12px;
-      width: 12px;
-      margin: 0 6px;
-      background-color: #ffc2d6;
-      border-radius: 50%;
-      display: inline-block;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-
-    .dot.active {
-      background-color: #ff4d88;
-      transform: scale(1.3);
-    }
-
-    /* CTA BUTTON */
     .cta-btn {
       display: block;
       width: 100%;
@@ -195,7 +118,6 @@
       transform: scale(1.03);
     }
 
-    /* PRICE BOX */
     .price-box {
       background: #ffe6f2;
       border: 3px solid #ffb6c9;
@@ -217,9 +139,47 @@
       border-bottom: 1px solid #ffd1df;
     }
 
-    .price-item:last-child {
-      border-bottom: none;
+    .price-item:last-child { border-bottom: none; }
+
+    .testimonial-container {
+      position: relative;
+      max-width: 100%;
+      margin: 20px auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
     }
+
+    .testimonial-slide { display: none; }
+    .testimonial-slide img { width: 100%; border-radius: 20px; object-fit: cover; }
+
+    .fade { animation: fadeEffect 1.2s ease-in-out; }
+
+    @keyframes fadeEffect { from { opacity: 0.3; } to { opacity: 1; } }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      padding: 12px;
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      background: rgba(255, 128, 170, 0.5);
+      border-radius: 50%;
+      transition: 0.3s;
+      user-select: none;
+    }
+
+    .prev:hover, .next:hover { background: #ff4d88; }
+    .prev { left: 15px; }
+    .next { right: 15px; }
+
+    .dots-container { text-align:center;margin-top:10px; }
+    .dot {
+      height:12px;width:12px;margin:0 6px;background:#ffc2d6;border-radius:50%;display:inline-block;cursor:pointer;
+    }
+    .dot.active { background:#ff4d88;transform:scale(1.3); }
   </style>
 </head>
 
@@ -254,7 +214,6 @@
     </div>
   </div>
 
-  <!-- PRICE LIST -->
   <div class="price-box">
     <h3>💸 Daftar Harga Paket</h3>
     <div class="price-item"><span>🎬 Preflix</span><strong>50K</strong></div>
@@ -262,7 +221,8 @@
     <div class="price-item"><span>🫧 Bubble</span><strong>20K</strong></div>
   </div>
 
-  <a href="https://t.me/" class="cta-btn">💬 Chat Admin via Telegram</a>
+  <!-- Admin CTA -->
+  <a href="https://t.me/iYeonsclydrv" class="cta-btn">💬 Chat Admin via Telegram</a>
 </section>
 
 <section id="requirements">
@@ -276,7 +236,8 @@
     <li>📌 memiliki pemahaman tentang bisnis (akan dibimbing sampai paham).</li>
   </ul>
 
-  <a href="https://t.me/" class="cta-btn">💬 Daftar Sekarang via Telegram</a>
+  <!-- CTA ke Channel -->
+  <a href="https://t.me/freelanceyeonna" class="cta-btn">📢 Lihat Info & Harga di Channel</a>
 </section>
 
 <section id="reminder">
@@ -286,7 +247,7 @@
   <p>‼️TOLONG BACA‼️ Kalau sudah chat & bilang masih mau mikir² atau ada alasan apa pun, HARAP tetap kabari.</p>
   <p>⚠️ BISNIS INI BUKAN SISTEM GAJI. Penghasilan tergantung kinerja dan job yang kamu kerjakan.</p>
 
-  <a href="https://t.me/" class="cta-btn">💬 Hubungi Admin</a>
+  <a href="https://t.me/iYeonsclydrv" class="cta-btn">💬 Hubungi Admin</a>
 </section>
 
 <section id="paket">
@@ -323,24 +284,17 @@
     <li>Class Editing</li>
   </ul>
 
-  <a href="https://t.me/" class="cta-btn">💬 Pilih Paket Sekarang</a>
+  <!-- CTA ke Channel -->
+  <a href="https://t.me/freelanceyeonna" class="cta-btn">📢 Lihat Paket di Channel</a>
 </section>
 
 <section id="testimoni">
   <h2>⭐ Testimoni Member</h2>
   <div class="testimonial-container">
-    <div class="testimonial-slide fade">
-      <img src="image/foto1.jpeg">
-    </div>
-    <div class="testimonial-slide fade">
-      <img src="image/foto2.jpeg">
-    </div>
-    <div class="testimonial-slide fade">
-      <img src="image/foto3.jpeg">
-    </div>
-    <div class="testimonial-slide fade">
-      <img src="image/foto4.jpeg">
-    </div>
+    <div class="testimonial-slide fade"><img src="image/foto1.jpeg"></div>
+    <div class="testimonial-slide fade"><img src="image/foto2.jpeg"></div>
+    <div class="testimonial-slide fade"><img src="image/foto3.jpeg"></div>
+    <div class="testimonial-slide fade"><img src="image/foto4.jpeg"></div>
 
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -353,7 +307,7 @@
     <span class="dot" onclick="currentSlide(4)"></span>
   </div>
 
-  <a href="https://t.me/" class="cta-btn">💬 Tanya Testimoni</a>
+  <a href="https://t.me/iYeonsclydrv" class="cta-btn">💬 Tanya Testimoni</a>
 </section>
 
 <footer>
